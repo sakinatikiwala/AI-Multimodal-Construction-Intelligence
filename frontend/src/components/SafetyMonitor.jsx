@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Upload, AlertTriangle, CheckCircle, FileText, X } from 'lucide-react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import { API_BASE_URL } from '../config';
 
 const SafetyMonitor = () => {
     const [text, setText] = useState('');
@@ -35,7 +36,7 @@ const SafetyMonitor = () => {
 
         try {
             // Using full URL to ensure connectivity without proxy setup
-            const res = await axios.post('http://localhost:8000/api/safety-monitor', formData, {
+            const res = await axios.post(`${API_BASE_URL}/api/safety-monitor`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             setResult(res.data);

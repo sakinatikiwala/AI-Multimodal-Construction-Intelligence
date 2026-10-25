@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Calendar, CheckCircle, AlertTriangle, Hammer } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const DailySiteAssistant = () => {
     const [activity, setActivity] = useState('Concreting');
@@ -14,7 +15,7 @@ const DailySiteAssistant = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await axios.post('http://localhost:8000/api/site-assistant', {
+            const res = await axios.post(`${API_BASE_URL}/api/site-assistant`, {
                 activity: activity,
                 labour_count: parseInt(labour),
                 site_condition: condition

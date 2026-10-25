@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { CloudRain, Sun, Wind, Umbrella } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const WeatherAdvisor = () => {
     const [activity, setActivity] = useState('Slab Conversion');
@@ -13,7 +14,7 @@ const WeatherAdvisor = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await axios.post('http://localhost:8000/api/weather-advisor', {
+            const res = await axios.post(`${API_BASE_URL}/api/weather-advisor`, {
                 activity: activity,
                 weather: weather
             });

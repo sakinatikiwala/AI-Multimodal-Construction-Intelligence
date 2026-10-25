@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import axios from 'axios'
 import { RefreshCw } from 'lucide-react'
+import { API_BASE_URL } from '../config'
 
 const AnalysisHistory = () => {
     const [items, setItems] = useState([])
@@ -11,7 +12,7 @@ const AnalysisHistory = () => {
         setLoading(true)
         setError('')
         try {
-            const response = await axios.get('http://localhost:8000/api/history')
+            const response = await axios.get(`${API_BASE_URL}/api/history`)
             setItems(response.data)
         } catch (requestError) {
             setError(

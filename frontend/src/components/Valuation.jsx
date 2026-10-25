@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Building2, TrendingUp } from 'lucide-react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import { API_BASE_URL } from '../config';
 
 const Valuation = () => {
     const [form, setForm] = useState({ location: '', area: '', property_type: 'Residential', building_age: '', amenities: '' });
@@ -17,7 +18,7 @@ const Valuation = () => {
         Object.keys(form).forEach(key => formData.append(key, form[key]));
 
         try {
-            const response = await axios.post('http://localhost:8000/api/real-estate-valuation', formData);
+            const response = await axios.post(`${API_BASE_URL}/api/real-estate-valuation`, formData);
             setResult(response.data);
         } catch (error) {
             console.error(error);

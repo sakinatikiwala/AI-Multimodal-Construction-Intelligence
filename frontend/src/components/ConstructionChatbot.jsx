@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { MessageSquare, Send } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const ConstructionChatbot = () => {
     const [query, setQuery] = useState('');
@@ -18,7 +19,7 @@ const ConstructionChatbot = () => {
         setQuery('');
 
         try {
-            const res = await axios.post('http://localhost:8000/api/chatbot', { query: userMsg.text });
+            const res = await axios.post(`${API_BASE_URL}/api/chatbot`, { query: userMsg.text });
             const aiMsg = {
                 role: 'ai',
                 text: res.data.reply,

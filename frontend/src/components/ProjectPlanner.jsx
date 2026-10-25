@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import { API_BASE_URL } from '../config';
 
 // 🛡️ Error Boundary Component
 class ErrorBoundary extends React.Component {
@@ -49,7 +50,7 @@ const ProjectPlannerContent = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:8000/api/project-planner', { description: desc });
+            const response = await axios.post(`${API_BASE_URL}/api/project-planner`, { description: desc });
             setPlan(response.data);
         } catch (error) {
             console.error("Planner failed", error);

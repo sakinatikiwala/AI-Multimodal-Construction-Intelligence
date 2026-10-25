@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Upload, Activity, AlertOctagon } from 'lucide-react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import { API_BASE_URL } from '../config';
 
 const CrackDetection = () => {
     const [text, setText] = useState('');
@@ -17,7 +18,7 @@ const CrackDetection = () => {
         if (image) formData.append('image', image);
 
         try {
-            const response = await axios.post('http://localhost:8000/api/crack-detection', formData);
+            const response = await axios.post(`${API_BASE_URL}/api/crack-detection`, formData);
             setResult(response.data);
         } catch (error) {
             console.error(error);

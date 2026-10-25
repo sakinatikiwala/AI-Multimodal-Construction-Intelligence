@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Book, FileText, LifeBuoy } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const KnowledgeBase = () => {
     const [query, setQuery] = useState('');
@@ -17,7 +18,7 @@ const KnowledgeBase = () => {
         formData.append('context_type', mode);
 
         try {
-            const response = await axios.post('http://localhost:8000/api/knowledge-assistant', formData);
+            const response = await axios.post(`${API_BASE_URL}/api/knowledge-assistant`, formData);
             setResult(response.data);
         } catch (error) {
             console.error(error);

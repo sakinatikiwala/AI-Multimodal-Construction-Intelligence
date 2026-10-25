@@ -1,0 +1,57 @@
+services:
+  - type: web
+    name: constructai-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirement.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: MYSQL_HOST
+        sync: false
+      - key: MYSQL_PORT
+        value: "3306"
+      - key: MYSQL_DATABASE
+        sync: false
+      - key: MYSQL_USER
+        sync: false
+      - key: MYSQL_PASSWORD
+        sync: false
+
+  - type: static
+    name: constructai-demo
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: constructai-api
+          property: host
+    routes:
+      - type: rewrite
+        source: /history
+        destination: /index.html
+      - type: rewrite
+        source: /crack-detection
+        destination: /index.html
+      - type: rewrite
+        source: /valuation
+        destination: /index.html
+      - type: rewrite
+        source: /planner
+        destination: /index.html
+      - type: rewrite
+        source: /knowledge
+        destination: /index.html
+      - type: rewrite
+        source: /chatbot
+        destination: /index.html
+      - type: rewrite
+        source: /daily-site
+        destination: /index.html
+      - type: rewrite
+        source: /weather
+        destination: /index.html
